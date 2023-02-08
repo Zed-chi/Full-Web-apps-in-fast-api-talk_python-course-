@@ -1,22 +1,21 @@
-from fastapi import APIRouter 
+from fastapi import APIRouter, Request 
+from settings import template_manager
 
 
 home_router = APIRouter()
 @home_router.get("/")
-def index(request:fastapi.Request):
+def index(request:Request):
     """Index page."""
-    resp = "<h1>qwe</h1>"
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./home/index.html",
         context={"request":request}
     )
 
 
 @home_router.get("/about")
-def about(request:fastapi.Request):
-    """Index page."""
-    resp = "<h1>qwe</h1>"
+def about(request:Request):
+    """About page."""
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./home/about.html",
         context={"request":request}
     )
