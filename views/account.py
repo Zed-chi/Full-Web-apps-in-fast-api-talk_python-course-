@@ -1,42 +1,41 @@
-from fastapi import APIRouter 
+from fastapi import APIRouter, Request
+from settings import template_manager
 
 
 account_router = APIRouter(prefix="/account")
+
+
 @account_router.get("/")
-def account(request:fastapi.Request):
+def account(request:Request):
     """Index page."""
-    resp = "<h1>qwe</h1>"
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./account/account.html",
         context={"request":request}
     )
 
 
 @account_router.get("/register")
-def register(request:fastapi.Request):
+def register(request:Request):
     """Index page."""
-    resp = "<h1>qwe</h1>"
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./account/register.html",
         context={"request":request}
     )
 
 
 @account_router.get("/login")
-def login(request:fastapi.Request):
+def login(request:Request):
     """Index page."""
-    resp = "<h1>qwe</h1>"
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./account/login.html",
         context={"request":request}
     )
 
 
 @account_router.get("/logout")
-def logout(request:fastapi.Request):
+def logout(request:Request):
     """Index page."""
-    resp = "<h1>qwe</h1>"
     return template_manager.TemplateResponse(        
-        "./index.html",
+        "./account/logout.html",
         context={"request":request}
     )
