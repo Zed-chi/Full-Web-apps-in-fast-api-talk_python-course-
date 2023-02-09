@@ -8,13 +8,16 @@
 <section>
     <fieldset>
         <legend>Register form</legend>
-        <form action="/account/login" method="post">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username">
-
+        <form action="/account/register" method="post">
+            <label for="name">Username</label>
+            <input type="text" name="name" id="name">
+            <hr>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+            <hr>
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
-
+            <hr>
             <input type="submit" value="Register">
         </form>
     </fieldset>
