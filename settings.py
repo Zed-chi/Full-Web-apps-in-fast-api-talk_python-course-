@@ -1,7 +1,7 @@
 from environs import Env
 from starlette.templating import Jinja2Templates
-from db import memory
 
+from db import memory
 
 env = Env()
 env.read_env()
