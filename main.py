@@ -6,11 +6,21 @@ from views import account, home, packages
 
 
 app = fastapi.FastAPI()
-app.mount("/static", app=StaticFiles(directory=ASSETS_DIR))
-app.include_router(account.account_router)
-app.include_router(home.home_router)
-app.include_router(packages.packages_router)    
+
+
+def main():
+    init()
+    uvicorn.run(app)
+
+
+def init():
+    app.mount("/static", app=StaticFiles(directory=ASSETS_DIR))
+    app.include_router(account.account_router)
+    app.include_router(home.home_router)
+    app.include_router(packages.packages_router)    
 
 
 if __name__ == "__main__":
-    uvicorn.run(app)
+    main()
+else:
+    init()
