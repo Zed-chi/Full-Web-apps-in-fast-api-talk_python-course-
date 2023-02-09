@@ -5,5 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    hello
+    <section class="container p-5">
+            <h1 class="">{{package_count}} now in archive</h1>
+            <form action="/packages" method="get" class="border row">
+                <input type="text" placeholder="Search projects">
+            </form>
+            <a href="/packages" >Browse all projects</a>
+    </section>
+    <section class="d-flex justify-content-around border p-4 flex-row">
+        <span class="">{{package_count}} projects</span>
+        <span class="">{{release_count}} releases</span>
+        <span class="">{{user_count}} users</span>
+    </section>
+    <section class="container">
+        <h3 class="text-center">New releases</h3>
+        <ul>
+            {% for package in latest_releases %}
+                <li class="card">
+                    <div class="card-header">
+                        <a href="/packages/{{package.id}}">{{package.name}}</a>
+                    </div>
+                    <div class="card-body">{{package.description}}</div>                
+                </li>            
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}
