@@ -1,3 +1,4 @@
 fastapi
 environs
 uvicorn
+aiofiles
