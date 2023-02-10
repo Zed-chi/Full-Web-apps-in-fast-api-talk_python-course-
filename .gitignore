@@ -2,3 +2,4 @@
 .pylint.d
 *.pyc
 .vscode/
+*.db
