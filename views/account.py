@@ -42,11 +42,13 @@ async def register(request: Request):
     await view_data.load()
     if view_data.error:
         return view_data.to_dict()
-    account: User = user_service.create_user(
+    account = user_service.create_user(
         view_data.name, view_data.email, view_data.password
     )
+    if not account:
+        return {"Error": "Registration error"}
     response = RedirectResponse("/account/login", 301)
-    cookie_auth.set_auth(response, account.pk)
+    cookie_auth.set_auth(response, account.id)
     return response
 
 
