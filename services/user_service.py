@@ -2,7 +2,8 @@ from typing import Optional
 from sqlalchemy_stuff.db_session import create_session
 from sqlalchemy_stuff import account
 from models import account as acc_model
-from settings import db
+from settings import db,HASH_ROUNDS
+from passlib.handlers.sha2_crypt import sha512_crypt 
 
 
 def user_count():
@@ -15,7 +16,7 @@ def user_count():
         session.close()
 
 
-def get_user(pk=None):
+def get_user(pk=None)-> Optional[account.User] :
     if not pk:
         return
     session = create_session()
@@ -44,7 +45,7 @@ def create_user(name, email, password):
         user = account.User()
         user.email = email
         user.name = name
-        user.password = password
+        user.password = sha512_crypt.hash(password, rounds=HASH_ROUNDS)
         session.add(user)
         session.commit()        
     except:
@@ -59,7 +60,7 @@ def login_user(email, password):
         user = session.query(account.User).get({"email":email})
         if not user:
             return
-        if user.password == password:
+        if sha512_crypt.verify(password, user.password):
             pass
     except:
         print("fuck relesase query")
