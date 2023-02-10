@@ -5,6 +5,7 @@ from view_data.base import BaseViewData
 class AccountViewData(BaseViewData):
     def __init__(self, request):
         super().__init__(request)
+        self.user = user_service.get_user(self.user_id)
 
 
 class AccountRegisterViewData(BaseViewData):
@@ -27,7 +28,7 @@ class AccountRegisterViewData(BaseViewData):
         return self.sanitize(name)
 
     def validate_email(self, email):
-        if user_service.get_user(pk=email):
+        if user_service.get_user_by_email(email):
             raise ValueError("User exists")
         return self.sanitize(email)
 
