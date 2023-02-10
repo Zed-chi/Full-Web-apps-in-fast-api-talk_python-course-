@@ -2,7 +2,6 @@ from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
 
 from infrastructure import cookie_auth
-from models.account import User
 from services import user_service
 from settings import template_manager
 from view_data.account import (AccountLoginViewData, AccountRegisterViewData,
@@ -48,7 +47,7 @@ async def register(request: Request):
     if not account:
         return {"Error": "Registration error"}
     response = RedirectResponse("/account/login", 301)
-    cookie_auth.set_auth(response, account.id)
+    cookie_auth.set_auth(response, str(account.id))
     return response
 
 
@@ -80,7 +79,7 @@ async def login_post(request: Request):
         view_data.error = "Login error"
         return view_data.to_dict()
     resp = RedirectResponse("/account", 301)
-    cookie_auth.set_auth(resp, user["pk"])
+    cookie_auth.set_auth(resp, str(user.id))
     return resp
 
 

@@ -17,7 +17,7 @@ class AccountRegisterViewData(BaseViewData):
         validated = self.validate_form(form)
         self.name = validated["name"]
         self.email = validated["email"]
-        self.password = hash(validated["password"])
+        self.password = validated["password"]
 
     def validate_name(self, name):
         if not name:
@@ -61,7 +61,7 @@ class AccountLoginViewData(BaseViewData):
         form = await self.request.form()
         validated = self.validate_form(form)
         self.email = validated["email"]
-        self.password = hash(validated["password"])
+        self.password = validated["password"]
 
     def validate_name(self, name):
         if not name:

@@ -30,20 +30,27 @@ def get_user_by_email(email=None):
         return
     session = create_session()
     try:
-        return session.query(account.User).get({"email": email})
+        return (
+            session.query(account.User)
+            .filter(account.User.email == email)
+            .first()
+        )
     finally:
         session.close()
 
 
 def create_user(name, email, password):
+    print(f"=== pass {password}")
     session = create_session()
     try:
         user = account.User()
         user.email = email
         user.name = name
+        # ignore
         user.password = sha512_crypt.hash(password, rounds=HASH_ROUNDS)
         session.add(user)
         session.commit()
+        return user
     finally:
         session.close()
 
@@ -51,10 +58,14 @@ def create_user(name, email, password):
 def login_user(email, password):
     session = create_session()
     try:
-        user = session.query(account.User).get({"email": email})
+        user = (
+            session.query(account.User)
+            .filter(account.User.email == email)
+            .first()
+        )
         if not user:
             return
-        if sha512_crypt.verify(password, user.password):
-            pass
+        if sha512_crypt.verify(password, str(user.password)):
+            return user
     finally:
         session.close()

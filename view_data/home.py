@@ -9,4 +9,4 @@ class IndexViewData(BaseViewData):
         self.package_count = package_service.package_count()
         self.user_count = user_service.user_count()
         self.release_count = package_service.release_count()
-        self.latest_releases = package_service.latest_releases()
+        self.latest_releases = package_service.latest_packages()

@@ -11,4 +11,4 @@ ASSETS_DIR = env.str("ASSETS_DIR", "assets")
 
 template_manager = Jinja2Templates(directory=HTML_DIR)
 db = memory.db
-HASH_ROUNDS = env.int("HASH_ROUNDS", 20)
+HASH_ROUNDS = env.int("HASH_ROUNDS", 1000)
