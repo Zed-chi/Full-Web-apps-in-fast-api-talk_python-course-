@@ -2,3 +2,4 @@ fastapi
 environs
 uvicorn
 aiofiles
+sqlalchemy
