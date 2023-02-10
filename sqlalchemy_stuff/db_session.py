@@ -1,25 +1,26 @@
 import sqlalchemy as sql
 import sqlalchemy.orm as orm
-from .base import SQLAlchemyBase
 
+from .base import SQLAlchemyBase
 
 factory = None
 engine = None
 
 
-def global_init(db_file:str):
+def global_init(db_file: str):
     global factory
 
-    if factory: return
+    if factory:
+        return
 
     if not db_file or not db_file.strip():
         raise Exception("no db file provided")
-    db_url:str = f"sqlite:///{db_file.strip()}"
+    db_url: str = f"sqlite:///{db_file.strip()}"
     engine = sql.create_engine(db_url, echo=True)
     factory = orm.sessionmaker(bind=engine)
-    
-    from . import package
-    from . import account
+
+    from . import account, package
+
     SQLAlchemyBase.metadata.create_all(engine)
 
 

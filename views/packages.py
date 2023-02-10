@@ -22,7 +22,7 @@ def detail_view(p_id: str, request: Request):
     """Index page."""
     view_data = DetailViewData(p_id, request)
     context = {"request": request}
-    context.update(view_data.to_dict())    
+    context.update(view_data.to_dict())
     return template_manager.TemplateResponse(
         "./packages/detail.html", context=context
     )

@@ -3,8 +3,8 @@ import uvicorn
 from starlette.staticfiles import StaticFiles
 
 from settings import ASSETS_DIR
-from views import account, home, packages
 from sqlalchemy_stuff.db_session import global_init
+from views import account, home, packages
 
 app = fastapi.FastAPI()
 
@@ -13,10 +13,11 @@ def main():
     init()
     uvicorn.run(app)
 
+
 def setup_db():
     db_file = "./data.db"
     global_init(db_file)
-    
+
 
 def init():
     app.mount("/static", app=StaticFiles(directory=ASSETS_DIR))
