@@ -3,3 +3,4 @@ environs
 uvicorn
 aiofiles
 sqlalchemy
+passlib
